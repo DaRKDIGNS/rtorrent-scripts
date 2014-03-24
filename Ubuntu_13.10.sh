@@ -199,8 +199,7 @@ service nginx restart
 chown -R $SUDO_USER:$SUDO_USER $USER_HOME
 
 echo -e  "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
-sudo su $SUDO_USER
-/usr/bin/vnstat -u -i eth0
+sudo su $SUDO_USER -c "/usr/bin/vnstat -u -i eth0"
 
 clear
 echo -e "\033[1;33m-----------------------------------------------"

@@ -8,7 +8,7 @@
 
 // To use with cron:
 // crontab -e
-// */10 * * * *  /usr/bin/php ~/start_rtorrent.php cron
+// */10 * * * *  /usr/bin/php /home/[user_name]/start_rtorrent.php cron
 
 // If you have a functioning email, email will be sent to notify
 // restarting of any rtorrent session only
@@ -54,23 +54,28 @@ if (count($session) !== 0) {
 		// restart rtorrent sessions if dead
 		if (shell_exec("tmux list-panes -t${tmux_session}:0 | grep -c dead") == 1) {
 			echo "$tmux_session:0 appears to be dead, restarting\n";
-			exec("tmux respawnp -t $tmux_session:0 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent.rc'");
+			//exec("tmux respawnp -t $tmux_session:0 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent.rc'");
+			exec("tmux respawnp -t $tmux_session:0 'rtorrent -n -o import=~/.rtorrent.rc'");
 		}
 		if (shell_exec("tmux list-panes -t${tmux_session}:1 | grep -c dead") == 1) {
 			echo "$tmux_session:1 appears to be dead, restarting\n";
-			exec("tmux respawnp -t $tmux_session:1 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-1.rc'");
+			//exec("tmux respawnp -t $tmux_session:1 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-1.rc'");
+			exec("tmux respawnp -t $tmux_session:1 'rtorrent -n -o import=~/.rtorrent-1.rc'");
 		}
 		if (shell_exec("tmux list-panes -t${tmux_session}:2 | grep -c dead") == 1) {
 			echo "$tmux_session:2 appears to be dead, restarting\n";
-			exec("tmux respawnp -t $tmux_session:2 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-2.rc'");
+			//exec("tmux respawnp -t $tmux_session:2 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-2.rc'");
+			exec("tmux respawnp -t $tmux_session:2 'rtorrent -n -o import=~/.rtorrent-2.rc'");
 		}
 		if (shell_exec("tmux list-panes -t${tmux_session}:3 | grep -c dead") == 1) {
 			echo "$tmux_session:3 appears to be dead, restarting\n";
-			exec("tmux respawnp -t $tmux_session:3 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-3.rc'");
+			//exec("tmux respawnp -t $tmux_session:3 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-3.rc'");
+			exec("tmux respawnp -t $tmux_session:3 'rtorrent -n -o import=~/.rtorrent-3.rc'");
 		}
 		if (shell_exec("tmux list-panes -t${tmux_session}:4 | grep -c dead") == 1) {
 			echo "$tmux_session:4 appears to be dead, restarting\n";
-			exec("tmux respawnp -t $tmux_session:4 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-4.rc'");
+			//exec("tmux respawnp -t $tmux_session:4 'rtorrent -n -o http_capath=~/certs -o import=~/.rtorrent-4.rc'");
+			exec("tmux respawnp -t $tmux_session:4 'rtorrent -n -o import=~/.rtorrent-4.rc'");
 		}
 		if (shell_exec("tmux list-panes -t${tmux_session}:8 | grep -c dead") == 1) {
 			if ((isset($argv[1]) && $argv[1] !== 'cron') || !isset($argv[1])) {
