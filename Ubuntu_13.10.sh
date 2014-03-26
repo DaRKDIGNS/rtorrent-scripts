@@ -73,7 +73,7 @@ apt-get purge -yqq apparmor* apparmor-utils
 
 echo -e "\033[1;33mAllow adding PPA's\033[0m"
 apt-get install -yqq software-properties-common
-apt-get install git subversion
+apt-get install -yqq git subversion
 apt-get install -yqq nano
 
 #get user home folder
@@ -149,7 +149,11 @@ cd /home/$SUDO_USER
 git clone https://github.com/ThomasAdam/tmux.git
 cd tmux
 ./autogen.sh
-./configure && make -j5
+
+# get system core count
+cores=`cat /proc/cpuinfo | grep processor | wc -l`
+((cores++))
+./configure && make -j$cores
 make install
 cd /home/$SUDO_USER
 
