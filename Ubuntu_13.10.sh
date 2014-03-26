@@ -148,11 +148,11 @@ cd /home/$SUDO_USER
 git clone https://github.com/ThomasAdam/tmux.git
 cd tmux
 ./autogen.sh
-./configure && make
+./configure && make -j5
 make install
 cd /home/$SUDO_USER
 
-wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rtorrent
+wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rutorrent
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
 
 sed -i "s/localhost/$IPADDY/" /etc/nginx/sites-available/rutorrent
@@ -199,6 +199,8 @@ service nginx restart
 chown -R $SUDO_USER:$SUDO_USER $USER_HOME
 
 echo -e  "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
+chmod o+x /usr/bin/vnstat
+chmod o+wx /var/lib/vnstat/
 sudo su $SUDO_USER -c "/usr/bin/vnstat -u -i eth0"
 
 clear
