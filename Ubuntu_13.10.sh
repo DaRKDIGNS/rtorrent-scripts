@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Exit on any error
+set -e
 
 if [[ $EUID -ne 0 ]]; then
 	if [[ whoami != $SUDO_USER ]]; then
@@ -44,6 +46,9 @@ read CHOICE
 if [[ $CHOICE != "y" ]]; then
 	exit
 fi
+
+# get working path
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 clear
 echo -e "\033[1;33mNginx needs to have the ip or FQDN, localhost will not work in most cases"
@@ -144,19 +149,27 @@ sed -i 's/display_startup_errors.*$/display_startup_errors = On/' /etc/php5/fpm/
 sed -i 's/display_startup_errors.*$/display_startup_errors = On/' /etc/php5/cli/php.ini
 
 echo -e "\033[1;33mCommpile TMUX\033[0m"
-apt-get install -yqq pkg-config libncurses5-dev libevent-dev
-cd /home/$SUDO_USER
-git clone https://github.com/ThomasAdam/tmux.git
-cd tmux
-./autogen.sh
-
 # get system core count
 cores=`cat /proc/cpuinfo | grep processor | wc -l`
 ((cores++))
+
+apt-get install -yqq pkg-config libncurses5-dev libevent-dev
+mkdir -p /home/$SUDO_USER/compile
+
+if [ -d "$USER_HOME/compile/tmux" ]; then
+	cd $USER_HOME/compile/tmux
+	git pull
+	make clean
+else
+	cd $USER_HOME/compile
+	git clone https://github.com/ThomasAdam/tmux.git
+	cd tmux
+fi
+./autogen.sh
 ./configure && make -j$cores
 make install
-cd /home/$SUDO_USER
 
+wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/tmux.conf -O /home/$SUDO_USER/.tmux.conf
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rutorrent
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
 
@@ -194,17 +207,20 @@ openssl req -new -key server.key -out server.csr
 cp server.key server.key.org
 echo -e "\033[1;33mRe-enter a Secure password\033[0m"
 openssl rsa -in server.key.org -out server.key
-echo -e "\033[1;33mRe-enter a Secure password\033[0m"
 openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
 
 service php5-fpm stop
 service php5-fpm start
 service nginx restart
 
+echo -e "\033[1;33mCompiling and Installing rtorrent\033[0m"
+cd $DIR
+./rtorrent-compile.sh
+
 # chown your users folder
 chown -R $SUDO_USER:$SUDO_USER $USER_HOME
 
-echo -e  "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
+echo -e "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
 rm /var/lib/vnstat/*
 rm /var/lib/vnstat/.*
 chmod o+x /usr/bin/vnstat
@@ -219,4 +235,3 @@ echo "rutorrent is installed and located at:"
 echo "https://$IPADDY/rutorrent"
 echo -e "\n\n\033[0m"
 exit
-
