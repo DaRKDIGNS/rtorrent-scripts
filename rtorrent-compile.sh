@@ -20,7 +20,9 @@ fi
 export USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
 #stop current rtorrent sessions
-sudo su $SUDO_USER -c "php $USER_HOME/start_rtorrent.php kill"
+if [ -f "$USER_HOME/start_rtorrent.php" ]; then
+	sudo su $SUDO_USER -c "php $USER_HOME/start_rtorrent.php kill"
+fi
 
 #create working folder
 mkdir -p $USER_HOME/compile
@@ -71,4 +73,6 @@ make install
 ldconfig
 
 #stop current rtorrent sessions
-sudo su $SUDO_USER -c "php $USER_HOME/start_rtorrent.php"
+if [ -f "$USER_HOME/start_rtorrent.php" ]; then
+	sudo su $SUDO_USER -c "php $USER_HOME/start_rtorrent.php"
+fi

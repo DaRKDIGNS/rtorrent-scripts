@@ -73,6 +73,7 @@ apt-get purge -yqq apparmor* apparmor-utils
 
 echo -e "\033[1;33mAllow adding PPA's\033[0m"
 apt-get install -yqq software-properties-common
+apt-get install git subversion
 apt-get install -yqq nano
 
 #get user home folder
@@ -168,7 +169,8 @@ ln -sf /etc/nginx/sites-available/rutorrent /etc/nginx/sites-enabled/rutorrent
 
 echo -e "\033[1;33mInstalling Extras\033[0m"
 unset DEBIAN_FRONTEND
-apt-get install -yqq vnstat ifstat htop pastebinit pigz iperf tinyca meld unrar p7zip-full make screen git cifs-utils nfs-common vlan
+apt-get install -yqq vnstat ifstat htop pastebinit pigz iperf tinyca meld unrar p7zip-full make screen cifs-utils nfs-common vlan
+apt-get install -yqq libcurl4-openssl-dev libsigc++-2.0-dev libcppunit-dev
 mv /bin/gzip /bin/gzip.old
 ln -s /usr/bin/pigz /bin/gzip
 sed -i 's/DAEMON=\/usr\/sbin\//DAEMON=\/usr\/bin\//' /etc/init.d/vnstat
@@ -209,9 +211,8 @@ clear
 echo -e "\033[1;33m-----------------------------------------------"
 echo -e "\033[1;33mInstall Complete...."
 echo
-echo -e "To create the VNSTAT Database for eth0, run:"
-echo -e "\033[0m"
-echo "Go to https://$IPADDY/rutorrent."
+echo "rutorrent is installed and located at:"
+echo "https://$IPADDY/rutorrent"
 echo -e "\n\n\033[0m"
 exit
 
