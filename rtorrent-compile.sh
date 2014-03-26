@@ -27,6 +27,10 @@ fi
 #create working folder
 mkdir -p $USER_HOME/compile
 
+# get system core count
+cores=`cat /proc/cpuinfo | grep processor | wc -l`
+((cores++))
+
 # Compile xlmrpc-c
 if [ -d "$USER_HOME/compile/xmlrpc-c" ]; then
 	cd $USER_HOME/compile/xmlrpc-c
@@ -38,7 +42,7 @@ else
 	cd $USER_HOME/compile/xmlrpc-c
 fi
 /bin/sh ./configure --disable-cplusplus -q
-make -j5
+make -j$cores
 make install
 
 # Install libtorrent
@@ -53,7 +57,7 @@ else
 fi
 /bin/sh ./autogen.sh
 /bin/sh ./configure -q
-make -j5
+make -j$cores
 make install
 
 # Install rtorrent
@@ -68,7 +72,7 @@ else
 fi
 /bin/sh ./autogen.sh
 /bin/sh ./configure --with-xmlrpc-c -q
-make -j5
+make -j$cores
 make install
 ldconfig
 

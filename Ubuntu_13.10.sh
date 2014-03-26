@@ -173,7 +173,7 @@ ln -sf /etc/nginx/sites-available/rutorrent /etc/nginx/sites-enabled/rutorrent
 
 echo -e "\033[1;33mInstalling Extras\033[0m"
 unset DEBIAN_FRONTEND
-apt-get install -yqq vnstat ifstat htop pastebinit pigz iperf tinyca meld unrar p7zip-full make screen cifs-utils nfs-common vlan
+apt-get install -yqq vnstat ifstat htop pastebinit pigz iperf tinyca unrar p7zip-full make screen cifs-utils nfs-common vlan
 apt-get install -yqq libcurl4-openssl-dev libsigc++-2.0-dev libcppunit-dev
 mv /bin/gzip /bin/gzip.old
 ln -s /usr/bin/pigz /bin/gzip
