@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Exit on any error
 set -e
 
 if [[ $EUID -ne 0 ]]; then
@@ -192,6 +191,11 @@ mv /bin/gzip /bin/gzip.old
 ln -s /usr/bin/pigz /bin/gzip
 sed -i 's/DAEMON=\/usr\/sbin\//DAEMON=\/usr\/bin\//' /etc/init.d/vnstat
 
+# Update Certificates
+wget -P /usr/share/ca-certificates/ --no-check-certificate https://certs.godaddy.com/repository/gd_intermediate.crt https://certs.godaddy.com/repository/gd_cross_intermediate.crt
+update-ca-certificates
+c_rehash
+
 echo -e "\033[1;33mCleaning Up\033[0m"
 apt-get -yqq autoclean
 apt-get -yqq autoremove
@@ -220,9 +224,11 @@ cd $DIR
 # chown your users folder
 chown -R $SUDO_USER:$SUDO_USER $USER_HOME
 
+echo -e "\033[1;33mInstalling rutorrent\033[0m"
+./install_rutorrent.sh
+
 echo -e "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
 rm /var/lib/vnstat/*
-rm /var/lib/vnstat/.*
 chmod o+x /usr/bin/vnstat
 chmod o+wx /var/lib/vnstat/
 sudo su $SUDO_USER -c "/usr/bin/vnstat -u -i eth0"
