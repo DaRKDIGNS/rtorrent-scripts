@@ -101,7 +101,7 @@ echo 'server 3.us.pool.ntp.org' >> /etc/openntpd/ntpd.conf
 
 # This allows for this server to be the network ntp server and you should point all other
 # servers on the lan to this one, or comment this out
-echo 'listen on $IPADDY' >> /etc/openntpd/ntpd.conf
+echo "listen on $IPADDY" >> /etc/openntpd/ntpd.conf
 service openntpd restart
 
 echo -e "\033[1;33mConfiguring ssh\033[0m"
