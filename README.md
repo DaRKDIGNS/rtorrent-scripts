@@ -19,5 +19,6 @@ sudo ./Ubuntu_13.10.sh
 
 
 ---
-<sub><sup>Original ideas and credits go to [Notos](https://github.com/Notos/seedbox-from-scratch)</sup></sub>
-<sub><sup>additional rtorrent.rc options from [bryanjswift](https://gist.github.com/bryanjswift/1525912)</sup></sub>
+<sub>Original ideas and credits go to [Notos](https://github.com/Notos/seedbox-from-scratch)</sub>
+
+<sub>additional rtorrent.rc options from [bryanjswift](https://gist.github.com/bryanjswift/1525912)</sub>
