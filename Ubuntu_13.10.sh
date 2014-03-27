@@ -172,6 +172,8 @@ wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rutorrent
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
 
+cores=`cat /proc/cpuinfo | grep processor | wc -l`
+sed -i "s/^worker_processes.*$/worker_processes $cores/" /etc/nginx/nginx.conf
 sed -i "s/localhost/$IPADDY/" /etc/nginx/sites-available/rutorrent
 if ! grep -q 'fastcgi_index index.php;' "/etc/nginx/fastcgi_params" ; then
 	echo "fastcgi_index index.php;" | tee -a /etc/nginx/fastcgi_params
