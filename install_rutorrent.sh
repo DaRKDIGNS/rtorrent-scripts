@@ -76,10 +76,6 @@ echo "[erasedata]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.
 echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
 echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-echo "[extsearch]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 echo "[filedrop]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
@@ -105,6 +101,18 @@ echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugin
 
 echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 echo "[tracklabels]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[logoff]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[rutorrent-instantsearch]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[nfo]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
 # Add poweroff
