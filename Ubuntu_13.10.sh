@@ -180,9 +180,21 @@ fi
 ./configure && make -j$cores
 make install
 
-wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/tmux.conf -O /home/$SUDO_USER/.tmux.conf
-wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rutorrent
-wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
+if [ -f "config/tmux.conf" ]; then
+	cp config/tmux.conf /home/$SUDO_USER/.tmux.conf
+else
+	wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/tmux.conf -O /home/$SUDO_USER/.tmux.conf
+fi
+if [ -f "config/rutorrent" ]; then
+	cp config/rutorrent /etc/nginx/sites-available/rutorrent
+else
+	wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rutorrent -O /etc/nginx/sites-available/rutorrent
+fi
+if [ -f "config/nginx.conf" ]; then
+	cp config/nginx.conf /etc/nginx/nginx.conf
+else
+	wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
+fi
 
 cores=`cat /proc/cpuinfo | grep processor | wc -l`
 sed -i "s/^worker_processes.*$/worker_processes $cores;/" /etc/nginx/nginx.conf
@@ -239,13 +251,23 @@ service nginx restart
 exit
 echo -e "\033[1;33mCompiling and Installing rtorrent\033[0m"
 cd $DIR
-./rtorrent-compile.sh
+if [ -f "rtorrent-compile.sh" ]; then
+	./rtorrent-compile.sh
+else
+	wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/rtorrent-compile.sh -O $DIR/rtorrent-compile.sh
+	./rtorrent-compile.sh
+fi
 
 # chown your users folder
 chown -R $SUDO_USER:$SUDO_USER $USER_HOME
 
 echo -e "\033[1;33mInstalling rutorrent\033[0m"
-./install_rutorrent.sh
+if [ -f "install_rutorrent.sh" ]; then
+	./install_rutorrent.sh
+else
+	wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/install_rutorrent.sh -O $DIR/install_rutorrent.sh
+	./install_rutorrent.sh
+fi
 
 echo -e "\033[1;33mCreating VNSTAT Database for ETH0\033[0m"
 rm /var/lib/vnstat/*

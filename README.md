@@ -6,6 +6,14 @@ My scripts for installing and running rtorrent and rutorrent on ubuntu. These sc
 To run:
 
 ```
+git clone https://github.com/jonnyboy/rtorrent-scripts.git
+cd rtorrent-scripts
+sudo ./Ubuntu_13.10.sh
+```
+or
+```
+wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/Ubuntu_13.10.sh
+sudo chmod +x Ubuntu_13.10.sh
 sudo ./Ubuntu_13.10.sh
 ```
 
