@@ -41,170 +41,73 @@ else
 	ln -sfv $USER_HOME/compile/rutorrent/trunk/plugins /var/www/rutorrent/
 fi
 
+# disable all plugins
+sed -i -e 's/^enabled = .*$/enabled = no/' $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+
 # enable plugins
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[autotools]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[autotools]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[check_port]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[check_port]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[chunks]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[cpuload]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[cookies]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[create]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[cpuload]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[datadir]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[create]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[diskspace]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[data]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[edit]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[datadir]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[erasedata]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[diskspace]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[extsearch]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[edit]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[filedrop]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[erasedata]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[_getdir]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[extratio]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[httprpc]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[extsearch]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[show_peers_like_wtorrent]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[feeds]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[source]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[filedrop]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[theme]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[geoip]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[_getdir]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[history]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[httprpc]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[ipad]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[loginmgr]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[lookat]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[mediainfo]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[_noty]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[ratio]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[retrackers]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[rpc]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[rss]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[rssurlrewrite]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[rutracker_check]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[scheduler]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[screenshots]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[seedingtime]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[show_peers_like_wtorrent]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[source]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[_task]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[theme]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[throttle]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[tracklabels]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = yes" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[trafic]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-
-echo "" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "[unpack]" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
-echo "enabled = no" >> $USER_HOME/compile/rutorrent/conf/plugins.ini
+echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "[tracklabels]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
+echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
 # Add poweroff
 cd $USER_HOME/compile/rutorrent/trunk/plugins

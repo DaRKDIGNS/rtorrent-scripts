@@ -80,3 +80,7 @@ ldconfig
 if [ -f "$USER_HOME/start_rtorrent.php" ]; then
 	sudo su $SUDO_USER -c "php $USER_HOME/start_rtorrent.php"
 fi
+
+# Install .rtorrent.rc
+wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rtorrent.rc -O $USER_HOME/.rtorrent.rc
+sed -i -e "s/USERNAME/$SUDO_USER/" $USER_HOME/.rtorrent.rc

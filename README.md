@@ -8,3 +8,6 @@ These scripts assume a server install with only ssh installed.
 To run:
 
 sudo ./Ubuntu_13.10.sh
+
+
+# Original ideas and credits go to Notos-seedbox-from-scratch
