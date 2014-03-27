@@ -33,12 +33,10 @@ else
 	mkdir -p $USER_HOME/compile/rutorrent
 	cd $USER_HOME/compile/rutorrent
 	svn co http://rutorrent.googlecode.com/svn/trunk/
+	rm -r $USER_HOME/compile/rutorrent/trunk/rutorrent/plugins/
 	mkdir -p /var/www
 	chown -R www-data:www-data $USER_HOME/compile/rutorrent/
 	chown -RH www-data:www-data /var/www
-	ln -sfv $USER_HOME/compile/rutorrent/trunk/rutorrent /var/www/
-	rm -r /var/www/rutorrent/plugins
-	ln -sfv $USER_HOME/compile/rutorrent/trunk/plugins /var/www/rutorrent/
 fi
 
 # disable all plugins
@@ -126,17 +124,20 @@ echo "/* for Oblivion */" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/
 echo ".meter-value-start-color { background-color: #E05400 }" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
 echo ".meter-value-end-color { background-color: #8FBC00 }" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
 echo "::-webkit-scrollbar {width:12px;height:12px;padding:0px;margin:0px;}" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
-sed -i -e 's/plugin.prgStartColor.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
-sed -i -e 's/plugin.prgEndColor.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
-sed -i -e 's/plugin.prgStartColor.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
-sed -i -e 's/plugin.prgEndColor.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
-perl -pi -e "s/\$defaultTheme \= \"\"\;/\$defaultTheme \= \"Oblivion\"\;/g" $USER_HOME/compile/rutorrent/trunk/rutorrent/plugins/theme/conf.php
+sed -i -e 's/plugin.prgStartColor =.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
+sed -i -e 's/plugin.prgEndColor =.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
+sed -i -e 's/plugin.prgStartColor =.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
+sed -i -e 's/plugin.prgEndColor =.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
+perl -pi -e "s/\$defaultTheme \= \"\"\;/\$defaultTheme \= \"Oblivion\"\;/g" $USER_HOME/compile/rutorrent/trunk/plugins/theme/conf.php
 
 # Add NFO Viewer
 cd $USER_HOME/compile/rutorrent/trunk/plugins/
 wget http://srious.biz/nfo.tar.gz
 tar xzfv nfo.tar.gz
 rm nfo.tar.gz
+
+cp -R $USER_HOME/compile/rutorrent/trunk/rutorrent /var/www/
+cp -R $USER_HOME/compile/rutorrent/trunk/plugins /var/www/rutorrent/
 
 chown -R www-data:www-data $USER_HOME/compile/rutorrent/
 chown -hRLH www-data:www-data /var/www/
