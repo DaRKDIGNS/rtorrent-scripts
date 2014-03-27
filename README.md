@@ -10,4 +10,4 @@ To run:
 sudo ./Ubuntu_13.10.sh
 
 
-# Original ideas and credits go to Notos-seedbox-from-scratch
+Original ideas and credits go to Notos-seedbox-from-scratch
