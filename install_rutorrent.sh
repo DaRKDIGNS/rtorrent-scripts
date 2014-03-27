@@ -40,13 +40,6 @@ fi
 sed -i -e 's/^enabled = .*$/enabled = no/' $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 
 # enable plugins
-if ! grep -q "\[autotools\]" "$USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini" ; then
-	echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-	echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-	echo "[autotools]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-	echo "enabled = yes" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
-fi
-
 if ! grep -q "\[check_port\]" "$USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini" ; then
 	echo "" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
 	echo "[check_port]" >> $USER_HOME/compile/rutorrent/trunk/rutorrent/conf/plugins.ini
