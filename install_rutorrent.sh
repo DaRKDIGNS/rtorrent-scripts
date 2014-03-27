@@ -129,6 +129,7 @@ sed -i -e 's/plugin.prgEndColor =.*$/plugin.prgEndColor = new RGBackground("#F90
 sed -i -e 's/plugin.prgStartColor =.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
 sed -i -e 's/plugin.prgEndColor =.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
 perl -pi -e "s/\$defaultTheme \= \"\"\;/\$defaultTheme \= \"Oblivion\"\;/g" $USER_HOME/compile/rutorrent/trunk/plugins/theme/conf.php
+perl -pi -e "s/\"curl\"\t=> ''/\"curl\"\t=> '\/usr\/bin\/curl'/" $USER_HOME/compile/rutorrent/trunk/conf/config.php
 
 # Add NFO Viewer
 cd $USER_HOME/compile/rutorrent/trunk/plugins/
