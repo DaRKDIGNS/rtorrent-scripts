@@ -70,9 +70,11 @@ function updateapt() {
 updateapt
 
 echo -e "\033[1;33mRemoving Apparmor\033[0m"
-/etc/init.d/apparmor stop
-/etc/init.d/apparmor teardown
-update-rc.d -f apparmor remove
+if [ -f "/etc/init.d/apparmor" ]; then
+	/etc/init.d/apparmor stop
+	/etc/init.d/apparmor teardown
+	update-rc.d -f apparmor remove
+fi
 apt-get purge -yqq apparmor* apparmor-utils
 
 echo -e "\033[1;33mAllow adding PPA's\033[0m"
@@ -87,12 +89,18 @@ cp /etc/nanorc $USER_HOME/.nanorc
 sed -i -e 's/^# include/include/' $USER_HOME/.nanorc
 sed -i -e 's/^# set tabsize 8/set tabsize 4/' $USER_HOME/.nanorc
 sed -i -e 's/^# set historylog/set historylog/' $USER_HOME/.nanorc
-ln -s $USER_HOME/.nanorc /root/
+ln -sf $USER_HOME/.nanorc /root/
 
 echo -e "\033[1;33mConfiguring OpenNTPD\033[0m"
-ntpdate pool.ntp.org
-apt-get install openntpd
-mv /etc/openntpd/ntpd.conf /etc/openntpd/ntpd.conf.orig
+if ! grep -q 'server 0.us.pool.ntp.org' "/etc/openntpd/ntpd.conf" ; then
+	ntpdate pool.ntp.org
+	apt-get install openntpd
+fi
+if [ -f "/etc/openntpd/ntpd.conf.orig" ]; then
+	rm -f /etc/openntpd/ntpd.conf
+else
+	mv /etc/openntpd/ntpd.conf /etc/openntpd/ntpd.conf.orig
+fi
 echo 'server 0.us.pool.ntp.org' >> /etc/openntpd/ntpd.conf
 echo 'server 1.us.pool.ntp.org' >> /etc/openntpd/ntpd.conf
 echo 'server 2.us.pool.ntp.org' >> /etc/openntpd/ntpd.conf
@@ -100,7 +108,11 @@ echo 'server 3.us.pool.ntp.org' >> /etc/openntpd/ntpd.conf
 
 # This allows for this server to be the network ntp server and you should point all other
 # servers on the lan to this one, or comment this out
-echo "listen on $IPADDY" >> /etc/openntpd/ntpd.conf
+if ! grep -q 'listen on' "/etc/openntpd/ntpd.conf" ; then
+	echo "listen on $IPADDY" >> /etc/openntpd/ntpd.conf
+else
+	sed -i -e "s/listen on.*$/listen on $IPADDY/" /etc/openntpd/ntpd.conf
+fi
 service openntpd restart
 
 echo -e "\033[1;33mConfiguring ssh\033[0m"
@@ -173,24 +185,29 @@ wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/nginx.conf -O /etc/nginx/nginx.conf
 
 cores=`cat /proc/cpuinfo | grep processor | wc -l`
-sed -i "s/^worker_processes.*$/worker_processes $cores/" /etc/nginx/nginx.conf
+sed -i "s/^worker_processes.*$/worker_processes $cores;/" /etc/nginx/nginx.conf
 sed -i "s/localhost/$IPADDY/" /etc/nginx/sites-available/rutorrent
 if ! grep -q 'fastcgi_index index.php;' "/etc/nginx/fastcgi_params" ; then
+	echo "" >> /etc/nginx/fastcgi_params
 	echo "fastcgi_index index.php;" | tee -a /etc/nginx/fastcgi_params
 fi
 if ! grep -q 'fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' "/etc/nginx/fastcgi_params" ; then
 	echo "fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" | tee -a /etc/nginx/fastcgi_params
 fi
 
-unlink /etc/nginx/sites-enabled/default
+if [ -f "/etc/nginx/sites-enabled/default" ]; then
+	unlink /etc/nginx/sites-enabled/default
+fi
 ln -sf /etc/nginx/sites-available/rutorrent /etc/nginx/sites-enabled/rutorrent
 
 echo -e "\033[1;33mInstalling Extras\033[0m"
 unset DEBIAN_FRONTEND
 apt-get install -yqq vnstat ifstat htop pastebinit pigz iperf tinyca unrar p7zip-full make screen cifs-utils nfs-common vlan
 apt-get install -yqq libcurl4-openssl-dev libsigc++-2.0-dev libcppunit-dev
-mv /bin/gzip /bin/gzip.old
-ln -s /usr/bin/pigz /bin/gzip
+if [ ! -f "/bin/gzip.old" ]; then
+	mv /bin/gzip /bin/gzip.old
+fi
+ln -sf /usr/bin/pigz /bin/gzip
 sed -i 's/DAEMON=\/usr\/sbin\//DAEMON=\/usr\/bin\//' /etc/init.d/vnstat
 
 # Update Certificates
@@ -203,22 +220,23 @@ apt-get -yqq autoclean
 apt-get -yqq autoremove
 
 #ssl
-echo -e "\033[1;33mCreating Self Signed Certificate\033[0m"
-mkdir -p /etc/ssl/nginx/conf
-cd /etc/ssl/nginx/conf
-echo -e "\033[1;33mEnter a Secure password\033[0m"
-openssl genrsa -des3 -out server.key 4096
-echo -e "\033[1;33mRe-enter a Secure password\033[0m"
-openssl req -new -key server.key -out server.csr
-cp server.key server.key.org
-echo -e "\033[1;33mRe-enter a Secure password\033[0m"
-openssl rsa -in server.key.org -out server.key
-openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
-
+if [ ! -f "/etc/ssl/nginx/conf/server.key" ] || [ ! -f "/etc/ssl/nginx/conf/server.crt" ] || [ ! -f "/etc/ssl/nginx/conf/server.csr" ]; then
+	echo -e "\033[1;33mCreating Self Signed Certificate\033[0m"
+	mkdir -p /etc/ssl/nginx/conf
+	cd /etc/ssl/nginx/conf
+	echo -e "\033[1;33mEnter a Secure password\033[0m"
+	openssl genrsa -des3 -out server.key 4096
+	echo -e "\033[1;33mRe-enter a Secure password\033[0m"
+	openssl req -new -key server.key -out server.csr
+	cp server.key server.key.org
+	echo -e "\033[1;33mRe-enter a Secure password\033[0m"
+	openssl rsa -in server.key.org -out server.key
+	openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
+fi
 service php5-fpm stop
 service php5-fpm start
 service nginx restart
-
+exit
 echo -e "\033[1;33mCompiling and Installing rtorrent\033[0m"
 cd $DIR
 ./rtorrent-compile.sh
