@@ -192,6 +192,9 @@ if [ ! -d "$USER_HOME/compile/rutorrent/trunk/plugins/nfo" ]; then
 	rm nfo.tar.gz
 fi
 
+# preset rutorrent ui settings
+echo '{"webui.alternate_color":1,"webui.effects":1,"webui.ignore_timeouts":1,"webui.dateformat":"1","webui.speedintitle":1}' > $USER_HOME/compile/rutorrent/trunk/rutorrent/share/settings/uisettings.json
+
 cp -R $USER_HOME/compile/rutorrent/trunk/rutorrent /var/www/
 cp -R $USER_HOME/compile/rutorrent/trunk/plugins /var/www/rutorrent/
 
