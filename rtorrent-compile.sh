@@ -84,3 +84,7 @@ fi
 # Install .rtorrent.rc
 wget --no-check-certificate https://raw.githubusercontent.com/jonnyboy/rtorrent-scripts/master/config/rtorrent.rc -O $USER_HOME/.rtorrent.rc
 sed -i -e "s/USERNAME/$SUDO_USER/" $USER_HOME/.rtorrent.rc
+mkdir -p $USER_HOME/Downloads/.session/
+mkdir -p $USER_HOME/Downloads/watch
+mkdir -p $USER_HOME/Downloads/incomplete
+

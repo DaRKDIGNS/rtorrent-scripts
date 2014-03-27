@@ -126,6 +126,10 @@ echo "/* for Oblivion */" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/
 echo ".meter-value-start-color { background-color: #E05400 }" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
 echo ".meter-value-end-color { background-color: #8FBC00 }" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
 echo "::-webkit-scrollbar {width:12px;height:12px;padding:0px;margin:0px;}" | tee -a $USER_HOME/compile/rutorrent/trunk/rutorrent/css/style.css > /dev/null
+sed -i -e 's/plugin.prgStartColor.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
+sed -i -e 's/plugin.prgEndColor.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/diskspace/init.js
+sed -i -e 's/plugin.prgStartColor.*$/plugin.prgStartColor = new RGBackground("#9ADC00");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
+sed -i -e 's/plugin.prgEndColor.*$/plugin.prgEndColor = new RGBackground("#F90009");/' $USER_HOME/compile/rutorrent/trunk/plugins/cpuload/init.js
 perl -pi -e "s/\$defaultTheme \= \"\"\;/\$defaultTheme \= \"Oblivion\"\;/g" $USER_HOME/compile/rutorrent/trunk/rutorrent/plugins/theme/conf.php
 
 # Add NFO Viewer

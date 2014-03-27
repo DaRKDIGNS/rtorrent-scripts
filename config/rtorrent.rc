@@ -26,7 +26,7 @@ session = ~/Downloads/.session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
-schedule = watch_directory,10,10,load=~/Downloads/torrents/watch/*.torrent	
+schedule = watch_directory,10,10,load=~/Downloads/watch/*.torrent	
 #schedule = tied_directory,10,10,start_tied=
 schedule = untied_directory,10,10,close_untied=
 
