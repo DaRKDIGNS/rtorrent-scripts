@@ -5,9 +5,11 @@ My scripts for installing and running rtorrent and rutorrent on ubuntu.
 
 These scripts assume a server install with only ssh installed.
 
+The combination of nginx, php-fpm and httprpc make this a very speedy webui.
+
 To run:
 
 sudo ./Ubuntu_13.10.sh
 
 
-Original ideas and credits go to Notos-seedbox-from-scratch
+####Original ideas and credits go to Notos-seedbox-from-scratch
