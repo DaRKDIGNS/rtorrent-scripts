@@ -17,4 +17,6 @@ sudo chmod +x Ubuntu_13.10.sh
 sudo ./Ubuntu_13.10.sh
 ```
 
+---
 ###### Original ideas and credits go to [Notos](https://github.com/Notos/seedbox-from-scratch)
+###### additional rtorrent.rc options ffrom [bryanjswift](https://gist.github.com/bryanjswift/1525912)
