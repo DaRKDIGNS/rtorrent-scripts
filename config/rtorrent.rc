@@ -1,3 +1,4 @@
+
 # Maximum memory allowed before writing to disk
 max_memory_usage = 2G
 
@@ -99,7 +100,9 @@ peer_exchange = no
 scgi_port = 127.0.0.1:5000
 execute = {sh,-c,/usr/bin/php /var/www/rutorrent/php/initplugins.php USERNAME &}
 http_capath = /etc/ssl/certs
-network.http.ssl_verify_peer.set=0
+
+# don't validate ssl certs, only use if your tracker is using self signed cert and it fails validation
+network.http.ssl_verify_peer.set = 0
 
 # Sort the main view by ratio
 view.sort_current = main,greater=d.get_ratio=
