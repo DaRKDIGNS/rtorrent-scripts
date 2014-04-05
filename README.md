@@ -19,4 +19,4 @@ sudo ./Ubuntu_13.10.sh
 
 
 ---
-<sub>Ispired By: [Notos](https://github.com/Notos/seedbox-from-scratch) and [bryanjswift](https://gist.github.com/bryanjswift/1525912)</sub>
+<sub>Inspired By: [Notos](https://github.com/Notos/seedbox-from-scratch) and [bryanjswift](https://gist.github.com/bryanjswift/1525912)</sub>
