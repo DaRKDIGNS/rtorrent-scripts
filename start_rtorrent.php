@@ -13,7 +13,7 @@
 // If you have a functioning email, email will be sent to notify
 // restarting of any rtorrent session only
 
-if (!isset($argv[1]) || ($argv[1] !== "exit" && $argv[1] !== "kill" && $argv[1] !== "start" && $argv[1] !== "cron")) {
+if (!isset($argv[1]) || ($argv[1] !== "exit" && $argv[1] !== "kill" && $argv[1] !== "start" && $argv[1] !== "cron" && $argv[1] !== "open")) {
 	exit("\nThis script will start multiple rtorrent sessions.\n\n"
 		. "php $argv[0] start    ...: To start all rtorrent sessions.\n"
 		. "php $argv[0] cron     ...: To start all rtorrent sessions but not attach to the tmux session.\n"
@@ -63,7 +63,7 @@ if (count($session) !== 0) {
 			exit("\ntmux session $tmux_session has been terminated.\n\n");
 		}
 		exit();
-	} else {
+	} elseif ($argv[1] === "start" || $argv[1] === "cron") {
 		// restart rtorrent sessions if dead
 		if (shell_exec("tmux list-panes -t $tmux_session:0 | grep -c dead") == 1) {
 			echo "$tmux_session:0 appears to be dead, restarting\n";
@@ -90,16 +90,16 @@ if (count($session) !== 0) {
 				exec("tmux respawnp -t $tmux_session:8 'chromium-browser'");
 			}
 		}
-		if ($argv[1] === "start") {
-			exec("tmux a -t $tmux_session");
-		}
+	}
+	if ($argv[1] === "start" || $argv[1] === "open") {
+		exec("tmux a -t $tmux_session");
 	}
 } else {
 	if ($argv[1] === "kill") {
 		exit("\nThere is no tmux session running and therefore there are no rtorrent sessions to terminate.\n\n");
 	} elseif ($argv[1] === "exit") {
 		exit("\nThere is no tmux session to terminate.\n\n");
-	} else {
+	} elseif ($argv[1] === "start" || $argv[1] === "cron") {
 		exec("tmux -f ~/.tmux.conf new-session -d -s $tmux_session -n 0 'rtorrent -n -o import=~/.rtorrent.rc'");
 		exec("tmux new-window -t $tmux_session:1 -n 1 'rtorrent -n -o import=~/.rtorrent-1.rc'");
 		exec("tmux new-window -t $tmux_session:2 -n 2 'rtorrent -n -o import=~/.rtorrent-2.rc'");
@@ -110,8 +110,19 @@ if (count($session) !== 0) {
 		exec("tmux selectp -t 0; tmux splitw -t $tmux_session:6 -h -p 50 'vnstat -l'");
 		exec("tmux new-window -t $tmux_session:7 -n bash 'bash -i'");
 		exec("tmux new-window -t $tmux_session:8 -n chromium 'chromium-browser'");
-		if ($argv[1] === "start") {
-			exec("tmux select-window -t $tmux_session:7; tmux attach-session -d -t $tmux_session");
-		}
+	} elseif ($argv[1] === "open") {
+		exec("tmux -f ~/.tmux.conf new-session -d -s $tmux_session -n 0");
+		exec("tmux new-window -t $tmux_session:1 -n 1");
+		exec("tmux new-window -t $tmux_session:2 -n 2");
+		exec("tmux new-window -t $tmux_session:3 -n 3");
+		exec("tmux new-window -t $tmux_session:4 -n 4");
+		exec("tmux new-window -t $tmux_session:5 -n htop 'htop'");
+		exec("tmux new-window -t $tmux_session:6 -n vnstat 'watch -n30 \"vnstat -u && vnstat -i eth0\"'");
+		exec("tmux selectp -t 0; tmux splitw -t $tmux_session:6 -h -p 50 'vnstat -l'");
+		exec("tmux new-window -t $tmux_session:7 -n bash 'bash -i'");
+		exec("tmux new-window -t $tmux_session:8 -n chromium 'chromium-browser'");
+	}
+	if ($argv[1] === "start" || $argv[1] === "open") {
+		exec("tmux select-window -t $tmux_session:7; tmux attach-session -d -t $tmux_session");
 	}
 }
