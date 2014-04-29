@@ -16,6 +16,13 @@ if [[ $EUID -ne 0 ]]; then
     exit
 fi
 
+if [[ $# -ne 1 ]]; then
+	echo -e "\nThis script will compile rtorrent.\n"
+	echo  "$0 current    ...: To compile bleeding edge version."
+	echo  "$0 default    ...: To compile rtorrent 0.9.3/0.13.3."
+	echo  "$0 previous   ...: To compile rtorrent 0.9.2/0.13.2."
+fi
+
 #get user home folder
 export USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
@@ -46,30 +53,44 @@ make -j$cores
 make install
 
 # Install libtorrent
-if [ -d "$USER_HOME/compile/libtorrent" ]; then
-	cd $USER_HOME/compile/libtorrent
-	git pull
-	make clean
-else
+rm -rf "$USER_HOME/compile/libtorrent"
+if [[ $1 == "current" ]]; then
 	cd $USER_HOME/compile/
 	git clone https://github.com/rakshasa/libtorrent.git libtorrent
-	cd $USER_HOME/compile/libtorrent
+elif [[ $1 == "default" ]]; then
+	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.3.tar.gz
+	tar xfz libtorrent-0.13.3.tar.gz
+	mv libtorrent-0.13.3 libtorrent
+elif [[ $1 == "previous" ]]; then
+	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.2.tar.gz
+	tar xfz libtorrent-0.13.2.tar.gz
+	mv libtorrent-0.13.2 libtorrent
 fi
+cd $USER_HOME/compile/libtorrent
 /bin/sh ./autogen.sh
 /bin/sh ./configure -q
 make -j$cores
 make install
 
 # Install rtorrent
-if [ -d "$USER_HOME/compile/rtorrent" ]; then
-	cd $USER_HOME/compile/rtorrent
-	git pull
-	make clean
-else
+rm -rf "$USER_HOME/compile/rtorrent"
+if [[ $1 == "current" ]]; then
 	cd $USER_HOME/compile/
 	git clone https://github.com/rakshasa/rtorrent.git rtorrent
-	cd $USER_HOME/compile/rtorrent
+elif [[ $1 == "default" ]]; then
+	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.3.tar.gz
+	tar xfz rtorrent-0.9.3.tar.gz
+	mv rtorrent-0.9.3 rtorrent
+elif [[ $1 == "previous" ]]; then
+	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.2.tar.gz
+	tar xfz rtorrent-0.9.2.tar.gz
+	mv rtorrent-0.9.2 rtorrent
 fi
+cd $USER_HOME/compile/rtorrent
 /bin/sh ./autogen.sh
 /bin/sh ./configure --with-xmlrpc-c -q
 make -j$cores
