@@ -17,10 +17,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [[ $# -ne 1 ]]; then
-	echo -e "\nThis script will compile rtorrent.\n"
-	echo  "$0 current    ...: To compile bleeding edge version."
-	echo  "$0 default    ...: To compile rtorrent 0.9.3/0.13.3."
-	echo  "$0 previous   ...: To compile rtorrent 0.9.2/0.13.2."
+	echo -e "\nThis script will compile xmlrpc-c, libtorrent and rtorrent.\n"
+	echo  "sudo $0 current    ...: To compile bleeding edge versions."
+	echo  "sudo $0 default    ...: To compile rtorrent/libtorrent 0.9.3/0.13.3."
+	echo  "sudo $0 previous   ...: To compile rtorrent/libtorrent 0.9.2/0.13.2."
 	echo
 	exit
 fi
