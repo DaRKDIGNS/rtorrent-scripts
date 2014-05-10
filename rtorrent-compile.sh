@@ -21,6 +21,8 @@ if [[ $# -ne 1 ]]; then
 	echo  "$0 current    ...: To compile bleeding edge version."
 	echo  "$0 default    ...: To compile rtorrent 0.9.3/0.13.3."
 	echo  "$0 previous   ...: To compile rtorrent 0.9.2/0.13.2."
+	echo
+	exit
 fi
 
 #get user home folder
