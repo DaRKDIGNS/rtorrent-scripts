@@ -158,6 +158,8 @@ sed -i 's/display_errors.*$/display_errors = On/' /etc/php5/fpm/php.ini
 sed -i 's/display_errors.*$/display_errors = On/' /etc/php5/cli/php.ini
 sed -i 's/display_startup_errors.*$/display_startup_errors = On/' /etc/php5/fpm/php.ini
 sed -i 's/display_startup_errors.*$/display_startup_errors = On/' /etc/php5/cli/php.ini
+sed -i 's/; max_input_vars.*$/max_input_vars = 10000/' /etc/php5/fpm/php.ini
+sed -i 's/; max_input_vars.*$/max_input_vars = 10000/' /etc/php5/cli/php.ini
 
 echo -e "\033[1;33mCommpile TMUX\033[0m"
 # get system core count
