@@ -19,8 +19,8 @@ fi
 if [[ $# -ne 1 ]]; then
 	echo -e "\nThis script will compile xmlrpc-c, libtorrent and rtorrent.\n"
 	echo  "sudo $0 current    ...: To compile bleeding edge versions."
-	echo  "sudo $0 default    ...: To compile rtorrent/libtorrent 0.9.3/0.13.3."
-	echo  "sudo $0 previous   ...: To compile rtorrent/libtorrent 0.9.2/0.13.2."
+	echo  "sudo $0 default    ...: To compile rtorrent/libtorrent 0.9.4/0.13.4."
+	echo  "sudo $0 previous   ...: To compile rtorrent/libtorrent 0.9.3/0.13.3."
 	echo
 	exit
 fi
@@ -61,14 +61,14 @@ if [[ $1 == "current" ]]; then
 	git clone https://github.com/rakshasa/libtorrent.git libtorrent
 elif [[ $1 == "default" ]]; then
 	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.4.tar.gz
+	tar xfz libtorrent-0.13.4.tar.gz
+	mv libtorrent-0.13.4 libtorrent
+elif [[ $1 == "previous" ]]; then
+	cd $USER_HOME/compile/
 	wget -c http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.3.tar.gz
 	tar xfz libtorrent-0.13.3.tar.gz
 	mv libtorrent-0.13.3 libtorrent
-elif [[ $1 == "previous" ]]; then
-	cd $USER_HOME/compile/
-	wget -c http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.2.tar.gz
-	tar xfz libtorrent-0.13.2.tar.gz
-	mv libtorrent-0.13.2 libtorrent
 fi
 cd $USER_HOME/compile/libtorrent
 /bin/sh ./autogen.sh
@@ -83,14 +83,14 @@ if [[ $1 == "current" ]]; then
 	git clone https://github.com/rakshasa/rtorrent.git rtorrent
 elif [[ $1 == "default" ]]; then
 	cd $USER_HOME/compile/
+	wget -c http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.4.tar.gz
+	tar xfz rtorrent-0.9.4.tar.gz
+	mv rtorrent-0.9.4 rtorrent
+elif [[ $1 == "previous" ]]; then
+	cd $USER_HOME/compile/
 	wget -c http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.3.tar.gz
 	tar xfz rtorrent-0.9.3.tar.gz
 	mv rtorrent-0.9.3 rtorrent
-elif [[ $1 == "previous" ]]; then
-	cd $USER_HOME/compile/
-	wget -c http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.2.tar.gz
-	tar xfz rtorrent-0.9.2.tar.gz
-	mv rtorrent-0.9.2 rtorrent
 fi
 cd $USER_HOME/compile/rtorrent
 /bin/sh ./autogen.sh
